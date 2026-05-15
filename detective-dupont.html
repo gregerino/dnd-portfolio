@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detective Du'Pont – Marcus Hultberg</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+
+<div class="bg-scene"><div class="bg-scene-img"></div><div class="bg-scene-overlay"></div></div>
+
+<nav aria-label="Sidhuvud">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-sigil" href="index.html">Marcus Hultberg</a>
+    <span class="nav-portfolio-label">Portfolio</span>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="navDrawer" aria-label="Huvudmeny">
+  <div class="nav-drawer-inner">
+    <a href="karaktarer.html" class="nav-drawer-link active">Karaktärer</a>
+    <a href="quests.html" class="nav-drawer-link">Quests</a>
+    <a href="story-arcs.html" class="nav-drawer-link">Story Arcs</a>
+    <a href="kartor.html" class="nav-drawer-link">Worldbuilding</a>
+    <a href="om-mig.html" class="nav-drawer-link">Om Mig</a>
+    <a href="kontakt.html" class="nav-drawer-link">Kontakt</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<section class="page-section">
+
+  <div class="char-detail-breadcrumb">
+    <a href="karaktarer.html">Karaktärer</a>
+    <span>/</span>
+    <span style="color: var(--text-secondary)">Detective Du'Pont</span>
+  </div>
+
+  <div class="char-detail-layout">
+    <div class="char-detail-content">
+      <div class="char-detail-archetype">NPC · Detektiv</div>
+      <div class="char-detail-name-row">
+        <div class="char-detail-photo">
+          <div class="char-detail-photo-frame">
+            <img src="Detective Du'Pont.png" alt="Detective Du'Pont" onclick="openLightbox(this.src, this.alt)">
+          </div>
+        </div>
+        <div class="char-detail-name">Detective Du'Pont</div>
+      </div>
+      <div class="char-detail-epithet">Phandalins självutnämnde mästare av deduktion</div>
+      <div class="char-detail-divider"></div>
+
+      <div class="char-detail-description">
+        <p>En hollyphant, en liten minivariant av en elefant med vingar, gyllene päls och en uppmärksamhet som skär genom varje rum. Du'Pont bär en top hat, en gyllene monokel och en liten fransk mustasch på snabeln. Klädd i läderväst med guldknappar och svart fluga doftar han lätt av parfym och talar med bred fransk brytning.</p>
+        <p>Du'Pont är teatralisk, intelligent och fullständigt övertygad om sin egen genialitet. Han svävar i små cirklar när han tänker, pekar med snabeln för att understryka poänger och behandlar varje mordutredning som en scen i en stor dramatisk produktion. Han utser spelarna till sina "assistenter" och avslutar varje fall med en monolog på värdshuset.</p>
+        <p>Under ytan är han skarpare än han verkar. Han hatar att ha fel, tar misslyckanden personligt och känner sig ibland ensam i sin analytiska skärpa. Han kom till Phandalin för att semestra, men ett mord kunde han inte motstå.</p>
+      </div>
+
+      <div class="char-detail-traits">
+        <span class="trait-tag">Komisk &amp; karismatisk</span>
+        <span class="trait-tag">Teatralisk logiker</span>
+        <span class="trait-tag">Questgivare</span>
+        <span class="trait-tag">Hollyphant</span>
+        <span class="trait-tag">Ovanligt svår att manipulera</span>
+      </div>
+
+      <div class="char-detail-quote">
+        "Jag behöver assistenter. Inte för att jag inte kan lösa detta själv, utan för att ni behöver lära er."
+      </div>
+
+      <a href="karaktarer.html" class="char-detail-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Tillbaka till karaktärer
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  <span class="footer-sigil"><strong>Marcus Hultberg</strong></span>
+  <div class="footer-rule"></div>
+  <span class="footer-sigil">2026</span>
+</footer>
+
+<script src="nav.js"></script>
+<script src="lightbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bramblewick Quickpocket – Marcus Hultberg</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+
+<div class="bg-scene"><div class="bg-scene-img"></div><div class="bg-scene-overlay"></div></div>
+
+<nav aria-label="Sidhuvud">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-sigil" href="index.html">Marcus Hultberg</a>
+    <span class="nav-portfolio-label">Portfolio</span>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="navDrawer" aria-label="Huvudmeny">
+  <div class="nav-drawer-inner">
+    <a href="karaktarer.html" class="nav-drawer-link active">Karaktärer</a>
+    <a href="quests.html" class="nav-drawer-link">Quests</a>
+    <a href="story-arcs.html" class="nav-drawer-link">Story Arcs</a>
+    <a href="kartor.html" class="nav-drawer-link">Worldbuilding</a>
+    <a href="om-mig.html" class="nav-drawer-link">Om Mig</a>
+    <a href="kontakt.html" class="nav-drawer-link">Kontakt</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<section class="page-section">
+
+  <div class="char-detail-breadcrumb">
+    <a href="karaktarer.html">Karaktärer</a>
+    <span>/</span>
+    <span style="color: var(--text-secondary)">Bramblewick Quickpocket</span>
+  </div>
+
+  <div class="char-detail-layout">
+    <div class="char-detail-content">
+      <div class="char-detail-archetype">NPC · Mystisk Handlare</div>
+      <div class="char-detail-name-row">
+        <div class="char-detail-photo">
+          <div class="char-detail-photo-frame">
+            <img src="Bramblewick Quickpocket.png" alt="Bramblewick Quickpocket" onclick="openLightbox(this.src, this.alt)">
+          </div>
+        </div>
+        <div class="char-detail-name">Bramblewick Quickpocket</div>
+      </div>
+      <div class="char-detail-epithet">Handlaren mellan vägarna</div>
+      <div class="char-detail-divider"></div>
+
+      <div class="char-detail-description">
+        <p>En halfling med fina men slitna kläder, rött krulligt hår och ett leende som aldrig helt försvinner. Han pillar ständigt med trinkets, mynt och kort, och kan dra fram föremål från ingenstans, som om verkligheten hade fickor bara han kunde se.</p>
+        <p>Bramblewick drivs inte av guld. Han samlar berättelser, öden och intressanta människor. Hans vagn (en prålig liten karavan som är större på insidan än utsidan) dyker upp vid vägkanten utan spår eller förvarning, alltid precis när spelarna behöver den som mest. Eller som minst.</p>
+        <p>Han manipulerar små saker för att stora händelser ska ske. Han testar människor genom att erbjuda val som avslöjar deras sanna natur. Han är inte ond, men han är inte helt pålitlig heller. Han vill spelarna väl, men på sitt sätt. Och han kommer alltid tillbaka, men aldrig när man förväntar sig det.</p>
+      </div>
+
+      <div class="char-detail-traits">
+        <span class="trait-tag">Återkommande NPC</span>
+        <span class="trait-tag">Mystisk agenda</span>
+        <span class="trait-tag">Kampanjverktyg</span>
+        <span class="trait-tag">Karismatisk manipulatör</span>
+        <span class="trait-tag">Ödesssamlare</span>
+      </div>
+
+      <div class="char-detail-quote">
+        "Ah! Där är ni. Jag började nästan tro att ni tagit en annan väg. Nåja, sådant brukar rätta till sig."
+      </div>
+
+      <a href="karaktarer.html" class="char-detail-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Tillbaka till karaktärer
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  <span class="footer-sigil"><strong>Marcus Hultberg</strong></span>
+  <div class="footer-rule"></div>
+  <span class="footer-sigil">2026</span>
+</footer>
+
+<script src="nav.js"></script>
+<script src="lightbox.js"></script>
+</body>
+</html>

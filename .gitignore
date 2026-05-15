@@ -1,0 +1,30 @@
+# Ignore non-portfolio files
+.DS_Store
+.claude/
+*.zip
+portfolio-standalone.html
+map pics portfolio/
+webpage background*
+
+# LegendKeeper exports (not part of portfolio site)
+Bramblewick Quickpocket.html
+Detective Du'Pont.html
+Elarion Thalanil.html
+Fleurette Grubbfin.html
+The Beasts of Phandalin Forest*.html
+The Dogwater Inn.html
+The Traveling Merchant.html
+Bringing the House Down*.html
+Murder on Miner's Trail*.zip
+Blood Night*.zip
+Marcus Hultberg Portfolio.html
+Skärmavbild*.png
+
+# Unused pages
+aldric-vorne.html
+brann-halftongue.html
+yselda-ashen-mere.html
+lore.html
+build-export.py
+build_portfolio.py
+build_optimized.py

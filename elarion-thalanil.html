@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elarion Thalanil – Marcus Hultberg</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+
+<div class="bg-scene"><div class="bg-scene-img"></div><div class="bg-scene-overlay"></div></div>
+
+<nav aria-label="Sidhuvud">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-sigil" href="index.html">Marcus Hultberg</a>
+    <span class="nav-portfolio-label">Portfolio</span>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="navDrawer" aria-label="Huvudmeny">
+  <div class="nav-drawer-inner">
+    <a href="karaktarer.html" class="nav-drawer-link active">Karaktärer</a>
+    <a href="quests.html" class="nav-drawer-link">Quests</a>
+    <a href="story-arcs.html" class="nav-drawer-link">Story Arcs</a>
+    <a href="kartor.html" class="nav-drawer-link">Worldbuilding</a>
+    <a href="om-mig.html" class="nav-drawer-link">Om Mig</a>
+    <a href="kontakt.html" class="nav-drawer-link">Kontakt</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<section class="page-section">
+
+  <div class="char-detail-breadcrumb">
+    <a href="karaktarer.html">Karaktärer</a>
+    <span>/</span>
+    <span style="color: var(--text-secondary)">Elarion Thalanil</span>
+  </div>
+
+  <div class="char-detail-layout">
+    <div class="char-detail-content">
+      <div class="char-detail-archetype">NPC · Värdshusägare</div>
+      <div class="char-detail-name-row">
+        <div class="char-detail-photo">
+          <div class="char-detail-photo-frame">
+            <img src="Elarion Thalanil.png" alt="Elarion Thalanil" onclick="openLightbox(this.src, this.alt)">
+          </div>
+        </div>
+        <div class="char-detail-name">Elarion Thalanil</div>
+      </div>
+      <div class="char-detail-epithet">Tavernvärden som lämnade skogen</div>
+      <div class="char-detail-divider"></div>
+
+      <div class="char-detail-description">
+        <p>Lång med brunt hår, alvöron och gröna ögon. Klädd i en vit skjorta med uppkavlade ärmar och ett läderförkläde. Runt halsen hänger en grön juvel, bevis på hans medlemskap i Emerald Enclave.</p>
+        <p>Elarion driver Emerald Tavern som neutral mark för alla resande. Han är tålmodig, vänlig och reserverad: torkar av bardisken medan han lyssnar och serverar dryck innan någon ber om det. Under den lugna ytan döljer sig en före detta ranger som har dödat fler än han vill minnas. Tavernen är medvetet byggd över en gammal alvisk helig plats.</p>
+        <p>Han samlar information genom rykten och samtal, vet var goblins och banditer setts, vilka jägare som är pålitliga och vilka som inte är det. Han undviker sitt gamla liv men saknar det ibland, och ser något av sig själv i unga äventyrare som passerar genom hans dörr.</p>
+      </div>
+
+      <div class="char-detail-traits">
+        <span class="trait-tag">F.d. ranger</span>
+        <span class="trait-tag">Informationssamlare</span>
+        <span class="trait-tag">Emerald Enclave</span>
+        <span class="trait-tag">Neutral mark</span>
+        <span class="trait-tag">Dolt förflutet</span>
+      </div>
+
+      <div class="char-detail-quote">
+        "Skogens djur beter sig aggressivt. Jag misstänker att det inte är naturligt."
+      </div>
+
+      <a href="karaktarer.html" class="char-detail-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Tillbaka till karaktärer
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  <span class="footer-sigil"><strong>Marcus Hultberg</strong></span>
+  <div class="footer-rule"></div>
+  <span class="footer-sigil">2026</span>
+</footer>
+
+<script src="nav.js"></script>
+<script src="lightbox.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roscoe – Marcus Hultberg</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+
+<div class="bg-scene"><div class="bg-scene-img"></div><div class="bg-scene-overlay"></div></div>
+
+<nav aria-label="Sidhuvud">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-sigil" href="index.html">Marcus Hultberg</a>
+    <span class="nav-portfolio-label">Portfolio</span>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="navDrawer" aria-label="Huvudmeny">
+  <div class="nav-drawer-inner">
+    <a href="karaktarer.html" class="nav-drawer-link active">Karaktärer</a>
+    <a href="quests.html" class="nav-drawer-link">Quests</a>
+    <a href="story-arcs.html" class="nav-drawer-link">Story Arcs</a>
+    <a href="kartor.html" class="nav-drawer-link">Worldbuilding</a>
+    <a href="om-mig.html" class="nav-drawer-link">Om Mig</a>
+    <a href="kontakt.html" class="nav-drawer-link">Kontakt</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<section class="page-section">
+
+  <div class="char-detail-breadcrumb">
+    <a href="karaktarer.html">Karaktärer</a>
+    <span>/</span>
+    <span style="color: var(--text-secondary)">Roscoe</span>
+  </div>
+
+  <div class="char-detail-layout">
+    <div class="char-detail-content">
+      <div class="char-detail-archetype">NPC · Värdshusägare</div>
+      <div class="char-detail-name-row">
+        <div class="char-detail-photo">
+          <div class="char-detail-photo-frame">
+            <img src="Roscoe.png" alt="Roscoe" onclick="openLightbox(this.src, this.alt)">
+          </div>
+        </div>
+        <div class="char-detail-name">Roscoe</div>
+      </div>
+      <div class="char-detail-epithet">Veteranen bakom bardisken</div>
+      <div class="char-detail-divider"></div>
+
+      <div class="char-detail-description">
+        <p>Nästan två meter lång, extremt bred och kraftigt byggd med kortklippt hår och ett tjockt, välskött skägg. Ärr löper över ansikte och armar, spår av ett liv som inte spenderades bakom en bardisk. Han bär enkla, robusta kläder under ett kraftigt läderförkläde och talar med en djup, göteborgsk dialekt.</p>
+        <p>Roscoe driver The Dogwater Inn, ett slitet värdshus vid vägkorsningen där Triboar Trail möter Miner's Trail, tio mil norr om Phandalin. Han är rakt på sak, lojal och utrustad med en torr humor som skär genom bullret. Han ger korta, tydliga svar, höjer sällan rösten, men alla tittar när han gör det. Han torkar ofta glas medan han pratar och ser igenom lögner snabbare än de flesta.</p>
+        <p>Under den pensionerade ytan finns en kapabel stridare som saknar äventyrarlivet mer än han vill erkänna. Han har kontakter från sin gamla tid som fortfarande kan dyka upp, och han har sett tecken på att problemen i området börjar likna gamla hot. Hans värdshus fungerar som en informationshub: rykten flödar fritt mellan trötta resenärer, karavanvakter och fulla äventyrare. Tillsammans med sina tvillingbarn Micah och Mara, och fyra sabbande mastiffer, håller han ordning på en plats där världar möts.</p>
+      </div>
+
+      <div class="char-detail-traits">
+        <span class="trait-tag">F.d. äventyrare</span>
+        <span class="trait-tag">Informationshub</span>
+        <span class="trait-tag">Kampanjankare</span>
+        <span class="trait-tag">Ser igenom lögner</span>
+        <span class="trait-tag">Dolt förflutet</span>
+      </div>
+
+      <div class="char-detail-quote">
+        "Sätt dig ner. Håll käften. Beställ nåt. I den ordningen."
+      </div>
+
+      <a href="karaktarer.html" class="char-detail-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Tillbaka till karaktärer
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  <span class="footer-sigil"><strong>Marcus Hultberg</strong></span>
+  <div class="footer-rule"></div>
+  <span class="footer-sigil">2026</span>
+</footer>
+
+<script src="nav.js"></script>
+<script src="lightbox.js"></script>
+</body>
+</html>

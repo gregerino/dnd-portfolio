@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcus Hultberg – Quest Designer & Story Writer</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 3rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-text {
+    max-width: 600px;
+    text-align: center;
+  }
+  .hero-name-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .hero-photo {
+    flex-shrink: 0;
+    width: 110px;
+  }
+
+  .hero-text {}
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 1.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 1px;
+    background: var(--purple);
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 6.5vw, 6.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-rule {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--purple), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .hero p {
+    max-width: 460px;
+    font-size: 1rem;
+    color: rgba(235,232,247,0.82);
+    line-height: 1.8;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* ── Photo ── */
+  .hero-photo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hero-photo-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(13,14,26,0.4);
+  }
+
+  .hero-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-photo-frame::after { display: none; }
+  .hero-photo-frame::before { display: none; }
+
+  .hero-photo-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse at 50% 50%, rgba(123,92,245,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      gap: 2rem;
+      padding: 4rem 1.5rem;
+      min-height: unset;
+    }
+    .hero-text { max-width: 100%; }
+    .hero-name-row { gap: 1rem; }
+    .hero-photo { width: 80px; }
+    .hero h1 { font-size: clamp(3rem, 12vw, 5rem); }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+
+<div class="bg-scene"><div class="bg-scene-img"></div><div class="bg-scene-overlay"></div></div>
+
+<nav aria-label="Sidhuvud">
+  <div class="nav-left">
+    <button class="hamburger" id="hamburger" aria-label="Öppna meny" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a class="nav-sigil" href="index.html">Marcus Hultberg</a>
+    <span class="nav-portfolio-label">Portfolio</span>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="navDrawer" aria-label="Huvudmeny">
+  <div class="nav-drawer-inner">
+    <a href="karaktarer.html" class="nav-drawer-link">Karaktärer</a>
+    <a href="quests.html" class="nav-drawer-link">Quests</a>
+    <a href="story-arcs.html" class="nav-drawer-link">Story Arcs</a>
+    <a href="kartor.html" class="nav-drawer-link">Worldbuilding</a>
+    <a href="om-mig.html" class="nav-drawer-link">Om Mig</a>
+    <a href="kontakt.html" class="nav-drawer-link">Kontakt</a>
+  </div>
+</nav>
+
+<main id="main-content">
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-name-row">
+      <div class="hero-photo">
+        <div class="hero-photo-frame">
+          <img src="IMG_5963.PNG" alt="Marcus Hultberg">
+        </div>
+      </div>
+      <h1>Marcus<br>Hultberg</h1>
+    </div>
+    <div class="hero-rule"></div>
+    <div class="hero-subtitle">Quest Designer &nbsp;·&nbsp; Story Writer &nbsp;·&nbsp; World Builder</div>
+    <p>Jag skapar världar med historia, karaktärer med djup och quests som spelare minns länge efter att spelet är slut.</p>
+  </div>
+</div>
+
+<section class="index-about">
+  <div class="index-about-inner">
+    <h2 class="index-about-heading">Spelbar berättelse, inte färdigskriven</h2>
+    <p>Jag tror att berättande och gameplay fungerar bäst när de stärker varandra, inte konkurrerar. Jag skriver inte manus som spelare ska följa. Jag skapar situationer som spelare vill lösa.</p>
+    <p>Mitt arbete kretsar kring levande NPC:er, små mänskliga konflikter och konsekvenser av spelarval. Jag blandar humor med allvar och bygger tydliga gameplay-krokar som leder in i berättelsen naturligt. Målet är att spelarna ska känna att världen reagerar på dem, och att varje karaktär de möter har ett liv bortom det de ser.</p>
+    <a href="om-mig.html" class="char-detail-back" style="margin-top: 1.5rem;">
+      Läs mer om mig
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="footer-sigil"><strong>Marcus Hultberg</strong></span>
+  <div class="footer-rule"></div>
+  <span class="footer-sigil">2026</span>
+</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
