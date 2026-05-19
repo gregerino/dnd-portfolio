@@ -513,9 +513,9 @@
     }
 
     // Also update the recommendation textarea if it exists
-    const templateSections = document.querySelectorAll('#section-summary-template .template-section');
+    const templateSections = document.querySelectorAll('#section-summary-template .summ-card');
     templateSections.forEach(section => {
-      const title = section.querySelector('h3');
+      const title = section.querySelector('.summ-card-title') || section.querySelector('h3');
       if (title && (title.textContent.includes('Rekommendation') || title.textContent.includes('Recommendation'))) {
         const ta = section.querySelector('.template-textarea');
         if (ta && !ta.dataset.userEdited) {
@@ -583,7 +583,7 @@
     });
 
     // --- Extract to summary template ---
-    const templateSections = document.querySelectorAll('#section-summary-template .template-section');
+    const templateSections = document.querySelectorAll('#section-summary-template .summ-card');
     let matchedTemplate = 0;
 
     // Each section has:
@@ -654,7 +654,7 @@
     // Build section-to-textarea map
     const sectionMap = [];
     templateSections.forEach(section => {
-      const titleEl = section.querySelector('h3');
+      const titleEl = section.querySelector('.summ-card-title') || section.querySelector('h3');
       if (!titleEl) return;
       const title = titleEl.textContent;
       const textarea = section.querySelector('.template-textarea');
