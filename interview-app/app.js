@@ -230,10 +230,12 @@
     // Update sidebar phase labels
     updatePhaseLabels();
 
-    // Re-render results if we have data
-    if (lastAnalysisData) {
-      document.getElementById('role-title-header').textContent = lastAnalysisData.analysis.title;
-      Renderer.renderAll(lastAnalysisData);
+    // Re-analyze and re-render results if we have data
+    if (lastAnalysisData && lastText) {
+      const data = Analyzer.analyze(lastText, lang);
+      lastAnalysisData = data;
+      document.getElementById('role-title-header').textContent = data.analysis.title;
+      Renderer.renderAll(data);
       setupScrollSpy();
       setupResultsInteractivity(true);
       // Restore star scores
@@ -863,7 +865,7 @@
       await sleep(300 + Math.random() * 200);
     }
 
-    const data = Analyzer.analyze(text);
+    const data = Analyzer.analyze(text, T.getLang());
     lastAnalysisData = data;
 
     document.getElementById('role-title-header').textContent = data.analysis.title;
