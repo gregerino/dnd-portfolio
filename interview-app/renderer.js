@@ -353,22 +353,6 @@ const Renderer = (() => {
 
       ${tipBox('s5Coach', 'coach')}
 
-      <!-- Inline interview notes -->
-      <div class="interview-notes-panel">
-        <div class="notes-panel-header">
-          <h3>📝 ${T.get('notesTitle')}</h3>
-          <div class="notes-actions">
-            <button class="btn-ghost btn-sm" id="extract-notes-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-              ${T.get('extractNotes')}
-            </button>
-            <button class="btn-ghost btn-sm" id="clear-notes-btn">${T.get('clearNotes')}</button>
-          </div>
-        </div>
-        <textarea id="interview-notes" class="interview-notes-textarea" placeholder="${esc(T.get('notesPlaceholder'))}" rows="6"></textarea>
-        <div id="extract-status" class="extract-status" style="display:none"></div>
-      </div>
-
       ${catKeys.map(key => {
         const qs = questions[key];
         if (!qs || qs.length === 0) return '';
@@ -470,7 +454,6 @@ const Renderer = (() => {
               </div>
               ${starRating(i)}
             </div>
-            <textarea class="notes-input scorecard-notes" data-index="${i}" placeholder="${T.get('evidenceNotes')}" rows="2"></textarea>
           </div>
         `).join('')}
       </div>
@@ -510,6 +493,21 @@ const Renderer = (() => {
       </div>
 
       ${tipBox('s8Coach', 'coach')}
+
+      <div class="interview-notes-panel">
+        <div class="notes-panel-header">
+          <h3>📝 ${T.get('notesTitle')}</h3>
+          <div class="notes-actions">
+            <button class="btn-ghost btn-sm" id="extract-notes-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              ${T.get('extractNotes')}
+            </button>
+            <button class="btn-ghost btn-sm" id="clear-notes-btn">${T.get('clearNotes')}</button>
+          </div>
+        </div>
+        <textarea id="interview-notes" class="interview-notes-textarea" placeholder="${esc(T.get('notesPlaceholder'))}" rows="6"></textarea>
+        <div id="extract-status" class="extract-status" style="display:none"></div>
+      </div>
 
       <div class="summ-grid">
         ${sections.map((s, i) => {

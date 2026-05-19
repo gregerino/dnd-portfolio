@@ -557,31 +557,6 @@
     const text = notesArea.value.trim();
     const lines = text.split('\n').filter(l => l.trim());
 
-    // --- Extract to scorecard notes ---
-    const scorecardRows = document.querySelectorAll('.scorecard-row');
-    let matchedScorecard = 0;
-
-    scorecardRows.forEach(row => {
-      const compName = row.dataset.compName.toLowerCase();
-      const keywords = compName.split(/[\s\/\-\&]+/).filter(w => w.length > 2);
-      const notesInput = row.querySelector('.scorecard-notes');
-      if (!notesInput) return;
-
-      const matched = [];
-      lines.forEach(line => {
-        const lower = line.toLowerCase();
-        if (keywords.some(kw => lower.includes(kw))) {
-          matched.push(line.trim());
-        }
-      });
-
-      if (matched.length > 0) {
-        const existing = notesInput.value.trim();
-        notesInput.value = existing ? existing + '\n' + matched.join('\n') : matched.join('\n');
-        matchedScorecard += matched.length;
-      }
-    });
-
     // --- Extract to summary template ---
     const templateSections = document.querySelectorAll('#section-summary-template .summ-card');
     let matchedTemplate = 0;
@@ -699,7 +674,7 @@
 
     // Show status
     if (status) {
-      status.textContent = T.get('extractSuccess') + ` (${matchedScorecard + matchedTemplate} ${T.getLang() === 'sv' ? 'rader matchade' : 'lines matched'})`;
+      status.textContent = T.get('extractSuccess') + ` (${matchedTemplate} ${T.getLang() === 'sv' ? 'rader matchade' : 'lines matched'})`;
       status.style.display = 'block';
       setTimeout(() => { status.style.display = 'none'; }, 4000);
     }

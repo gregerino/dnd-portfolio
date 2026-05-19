@@ -259,8 +259,8 @@ const T = (() => {
     s7Title: { en: 'Interview Scorecard', sv: 'Intervjubedömningsmall' },
     s7Desc: { en: 'Rate each competency during or after the interview. This is your main evaluation tool.', sv: 'Betygsätt varje kompetens under eller efter intervjun. Det här är ditt huvudsakliga utvärderingsverktyg.' },
     s7Coach: {
-      en: 'For each competency, give a score from 1 to 5 based on what the candidate demonstrated. Write a short note explaining WHY you gave that score — this is crucial for making fair decisions and explaining your reasoning to others.',
-      sv: 'För varje kompetens, ge ett betyg från 1 till 5 baserat på vad kandidaten visade. Skriv en kort anteckning som förklarar VARFÖR du gav det betyget — detta är avgörande för att fatta rättvisa beslut och förklara ditt resonemang för andra.',
+      en: 'For each competency, give a score from 1 to 5 based on what the candidate demonstrated. The scores are weighted and automatically generate a hiring recommendation. Use the Summary Template to write detailed notes.',
+      sv: 'För varje kompetens, ge ett betyg från 1 till 5 baserat på vad kandidaten visade. Betygen viktas och genererar automatiskt en anställningsrekommendation. Använd Sammanfattningsmallen för att skriva detaljerade anteckningar.',
     },
     competency: { en: 'Competency', sv: 'Kompetens' },
     category: { en: 'Category', sv: 'Kategori' },
