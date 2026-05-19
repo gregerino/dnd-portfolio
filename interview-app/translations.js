@@ -182,8 +182,8 @@ const T = (() => {
     s3Title: { en: 'Competency Library', sv: 'Kompetensbibliotek' },
     s3Desc: { en: 'Detailed competency definitions with level indicators. Use this as a reference when you are unsure how to rate a candidate.', sv: 'Detaljerade kompetensdefinitioner med nivåindikatorer. Använd detta som referens när du är osäker på hur du ska betygsätta en kandidat.' },
     s3Coach: {
-      en: 'This is a reference section — you do not need to read it before the interview. Come back here when filling in the scorecard if you are unsure what level (beginner/mid/senior) a candidate is at for a specific competency.',
-      sv: 'Det här är en referenssektion — du behöver inte läsa den före intervjun. Återvänd hit när du fyller i bedömningsmallen om du är osäker på vilken nivå (nybörjare/mellannivå/senior) en kandidat befinner sig på för en specifik kompetens.',
+      en: 'Toggle competencies on or off to customize your interview. The recommended ones are pre-selected based on the role description. Enable Big Five personality competencies to explore behavioral fit. Questions and scorecard update automatically.',
+      sv: 'Aktivera eller inaktivera kompetenser för att anpassa din intervju. De rekommenderade är förvalda baserat på rollbeskrivningen. Aktivera Big Five-personlighetskompetenser för att utforska beteendepassning. Frågor och bedömningsmall uppdateras automatiskt.',
     },
     beginner: { en: 'Beginner', sv: 'Nybörjare' },
     midLevel: { en: 'Mid-Level', sv: 'Mellannivå' },
@@ -192,6 +192,12 @@ const T = (() => {
     riskIndicators: { en: 'Risk Indicators', sv: 'Riskindikatorer' },
     exampleEvidence: { en: 'Example Evidence', sv: 'Exempelbevis' },
     evalCriteria: { en: 'Evaluation Criteria', sv: 'Bedömningskriterier' },
+    recommended: { en: 'Recommended', sv: 'Rekommenderad' },
+    personalityBased: { en: 'Personality-Based', sv: 'Personlighetsbaserad' },
+    roleCompetencies: { en: 'Role-Based Competencies', sv: 'Rollbaserade kompetenser' },
+    roleCompetenciesDesc: { en: 'Auto-detected from the role description. These are pre-selected and recommended for the interview.', sv: 'Automatiskt identifierade från rollbeskrivningen. Dessa är förvalda och rekommenderade för intervjun.' },
+    bigFiveCompetencies: { en: 'Big Five Personality Competencies', sv: 'Big Five-personlighetskompetenser' },
+    bigFiveCompetenciesDesc: { en: 'Based on Big Five personality traits relevant to this role. Toggle these on to include them in your interview questions and scorecard.', sv: 'Baserade på Big Five-personlighetsdrag relevanta för rollen. Aktivera dessa för att inkludera dem i intervjufrågor och bedömningsmall.' },
 
     // Section 4
     s4Title: { en: 'Big Five Behavioral Indicators', sv: 'Big Five-beteendeindikatorer' },

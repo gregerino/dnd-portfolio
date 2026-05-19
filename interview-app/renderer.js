@@ -193,24 +193,52 @@ const Renderer = (() => {
   function renderCompetencyLibrary(data) {
     const { competencyLibrary } = data;
 
-    return `
-      <div class="section-header">
-        <span class="section-number">📚</span>
-        <h2>${T.get('s3Title')}</h2>
-        <p>${T.get('s3Desc')}</p>
-      </div>
+    const roleComps = competencyLibrary.filter(c => c.source === 'role');
+    const b5Comps = competencyLibrary.filter(c => c.source === 'bigFive');
 
-      ${tipBox('s3Coach', 'coach')}
+    const levelToClass = (l) => !l ? 'medium' : l.includes('high') ? 'high' : l.includes('low') ? 'low' : 'medium';
 
-      ${competencyLibrary.map(comp => `
-        <div class="comp-lib-card" onclick="this.classList.toggle('open')">
+    function renderCard(comp) {
+      const selectedCls = comp.selected ? 'comp-lib-selected' : 'comp-lib-deselected';
+      const b5Badge = comp.source === 'bigFive'
+        ? `<span class="comp-lib-badge comp-lib-badge-b5">🧠 ${T.get('personalityBased')}</span>`
+        : '';
+      const recBadge = comp.source === 'role'
+        ? `<span class="comp-lib-badge comp-lib-badge-rec">✓ ${T.get('recommended')}</span>`
+        : '';
+      const b5Meter = comp.source === 'bigFive' && comp.b5Ideal
+        ? (() => {
+            const pctMap = { 'low': 25, 'medium-low': 35, 'medium': 50, 'medium-high': 70, 'high': 85 };
+            const pct = pctMap[comp.b5Ideal] || 50;
+            const cls = levelToClass(comp.b5Ideal);
+            return `<div class="comp-lib-b5-info">
+              <div class="comp-lib-b5-meter">
+                <span class="b5-meter-label">${T.get('low')}</span>
+                <div class="meter-track"><div class="meter-fill meter-${cls}" style="width:${pct}%"></div></div>
+                <span class="b5-meter-label">${T.get('high')}</span>
+              </div>
+              <p class="comp-lib-b5-rationale">${esc(comp.b5Rationale)}</p>
+            </div>`;
+          })()
+        : '';
+
+      return `
+        <div class="comp-lib-card ${selectedCls}" data-comp-id="${esc(comp.id)}">
           <div class="comp-lib-header">
             <div class="comp-lib-header-left">
-              <h3>${esc(comp.name)}</h3>
-              <p>${esc(comp.description)}</p>
+              <label class="comp-lib-toggle" onclick="event.stopPropagation()">
+                <input type="checkbox" ${comp.selected ? 'checked' : ''} data-comp-id="${esc(comp.id)}">
+                <span class="comp-toggle-slider"></span>
+              </label>
+              <div>
+                <h3>${esc(comp.name)}</h3>
+                <div class="comp-lib-badges">${recBadge}${b5Badge}</div>
+              </div>
             </div>
             <svg class="comp-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
+          <div class="comp-lib-preview">${esc(comp.description)}</div>
+          ${b5Meter}
           <div class="comp-lib-body">
             <div class="comp-levels">
               <div class="comp-level beginner">
@@ -250,8 +278,27 @@ const Renderer = (() => {
               </div>
             </div>
           </div>
-        </div>
-      `).join('')}
+        </div>`;
+    }
+
+    return `
+      <div class="section-header">
+        <span class="section-number">📚</span>
+        <h2>${T.get('s3Title')}</h2>
+        <p>${T.get('s3Desc')}</p>
+      </div>
+
+      ${tipBox('s3Coach', 'coach')}
+
+      <h3 class="comp-lib-group-title">${T.get('roleCompetencies')}</h3>
+      <p class="comp-lib-group-desc">${T.get('roleCompetenciesDesc')}</p>
+      ${roleComps.map(renderCard).join('')}
+
+      ${b5Comps.length > 0 ? `
+        <h3 class="comp-lib-group-title" style="margin-top:32px">🧠 ${T.get('bigFiveCompetencies')}</h3>
+        <p class="comp-lib-group-desc">${T.get('bigFiveCompetenciesDesc')}</p>
+        ${b5Comps.map(renderCard).join('')}
+      ` : ''}
     `;
   }
 
@@ -420,11 +467,11 @@ const Renderer = (() => {
     `;
   }
 
-  function starRating(index) {
+  function starRating(compId) {
     const labels = T.get('starLabels');
-    return `<div class="star-rating" data-row="${index}">
+    return `<div class="star-rating" data-row="${esc(compId)}">
       ${[1,2,3,4,5].map(n => `<span class="star" data-value="${n}" title="${labels[n-1]}">★</span>`).join('')}
-      <span class="star-label" data-row="${index}"></span>
+      <span class="star-label" data-row="${esc(compId)}"></span>
     </div>`;
   }
 
@@ -442,8 +489,8 @@ const Renderer = (() => {
       ${tipBox('s7Coach', 'coach')}
 
       <div id="scorecard-cards">
-        ${scorecard.map((c, i) => `
-          <div class="scorecard-row card" data-comp-name="${esc(c.name)}" data-weight="${c.weight}" data-index="${i}">
+        ${scorecard.map((c) => `
+          <div class="scorecard-row card" data-comp-name="${esc(c.name)}" data-comp-id="${esc(c.id)}" data-weight="${c.weight}">
             <div class="scorecard-row-top">
               <div class="scorecard-comp-info">
                 <h4>${esc(c.name)}</h4>
@@ -452,7 +499,7 @@ const Renderer = (() => {
                   <span class="weight-badge weight-${c.weight}">${c.weight}</span>
                 </div>
               </div>
-              ${starRating(i)}
+              ${starRating(c.id)}
             </div>
           </div>
         `).join('')}
@@ -608,14 +655,19 @@ const Renderer = (() => {
     document.getElementById('section-summary').innerHTML = renderSummary(data);
     document.getElementById('section-bias').innerHTML = renderBias();
     document.getElementById('section-competency-analysis').innerHTML = renderCompetencyAnalysis(data);
+    document.getElementById('section-competency-library').innerHTML = renderCompetencyLibrary(data);
     document.getElementById('section-questions').innerHTML = renderQuestions(data);
     document.getElementById('section-followups').innerHTML = renderFollowUps(data);
     document.getElementById('section-scorecard').innerHTML = renderScorecard(data);
     document.getElementById('section-summary-template').innerHTML = renderSummaryTemplate();
     document.getElementById('section-recommendations').innerHTML = renderRecommendations();
-    document.getElementById('section-competency-library').innerHTML = renderCompetencyLibrary(data);
-    document.getElementById('section-big-five').innerHTML = renderBigFive(data);
   }
 
-  return { renderAll };
+  return {
+    renderAll,
+    renderQuestions(data) { document.getElementById('section-questions').innerHTML = renderQuestions(data); },
+    renderFollowUps(data) { document.getElementById('section-followups').innerHTML = renderFollowUps(data); },
+    renderScorecard(data) { document.getElementById('section-scorecard').innerHTML = renderScorecard(data); },
+    renderCompetencyLibrary(data) { document.getElementById('section-competency-library').innerHTML = renderCompetencyLibrary(data); },
+  };
 })();

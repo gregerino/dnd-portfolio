@@ -389,12 +389,12 @@
   }
 
   // --- Star Rating Interactivity ---
-  let scorecardScores = {}; // { rowIndex: score }
+  let scorecardScores = {}; // { compId: score }
 
-  // Sync all star-rating widgets for a given row across both panels
-  function syncStarRow(row, val) {
+  // Sync all star-rating widgets for a given comp ID across both panels
+  function syncStarRow(compId, val) {
     const labels = T.get('starLabels');
-    document.querySelectorAll(`.star-rating[data-row="${row}"]`).forEach(rating => {
+    document.querySelectorAll(`.star-rating[data-row="${compId}"]`).forEach(rating => {
       rating.querySelectorAll('.star').forEach(s => {
         s.classList.toggle('active', val !== undefined && parseInt(s.dataset.value) <= val);
       });
@@ -402,7 +402,7 @@
       if (label) label.textContent = val !== undefined ? labels[val - 1] : '';
     });
     // Update floating comp highlight
-    document.querySelectorAll(`.floating-comp[data-index="${row}"]`).forEach(comp => {
+    document.querySelectorAll(`.floating-comp[data-comp-id="${compId}"]`).forEach(comp => {
       comp.classList.toggle('has-score', val !== undefined);
     });
   }
@@ -431,15 +431,15 @@
       const star = e.target.closest('.star');
       if (!star) return;
       const rating = star.closest('.star-rating');
-      const row = parseInt(rating.dataset.row);
+      const compId = rating.dataset.row;
       const val = parseInt(star.dataset.value);
 
-      if (scorecardScores[row] === val) {
-        delete scorecardScores[row];
-        syncStarRow(row, undefined);
+      if (scorecardScores[compId] === val) {
+        delete scorecardScores[compId];
+        syncStarRow(compId, undefined);
       } else {
-        scorecardScores[row] = val;
-        syncStarRow(row, val);
+        scorecardScores[compId] = val;
+        syncStarRow(compId, val);
       }
 
       updateAutoRecommendation();
@@ -475,10 +475,11 @@
     let weightTotal = 0;
     const weightMap = { critical: 3, high: 2, medium: 1 };
 
-    rows.forEach((row, i) => {
-      if (scorecardScores[i] !== undefined) {
+    rows.forEach((row) => {
+      const compId = row.dataset.compId;
+      if (scorecardScores[compId] !== undefined) {
         const w = weightMap[row.dataset.weight] || 1;
-        weightedSum += scorecardScores[i] * w;
+        weightedSum += scorecardScores[compId] * w;
         weightTotal += w;
       }
     });
@@ -731,18 +732,19 @@
     const catLabels = T.get('catLabels');
 
     let html = '';
-    rows.forEach((row, i) => {
+    rows.forEach((row) => {
       const name = row.dataset.compName;
       const weight = row.dataset.weight;
+      const compId = row.dataset.compId;
       html += `
-        <div class="floating-comp" data-index="${i}">
+        <div class="floating-comp" data-comp-id="${compId}">
           <div class="floating-comp-top">
             <span class="floating-comp-name">${name}</span>
             <span class="weight-badge weight-${weight}">${weight}</span>
           </div>
-          <div class="star-rating" data-row="${i}">
+          <div class="star-rating" data-row="${compId}">
             ${[1,2,3,4,5].map(n => `<span class="star" data-value="${n}" title="${labels[n-1]}">★</span>`).join('')}
-            <span class="star-label" data-row="${i}"></span>
+            <span class="star-label" data-row="${compId}"></span>
           </div>
         </div>`;
     });
@@ -770,10 +772,11 @@
     const weightMap = { critical: 3, high: 2, medium: 1 };
     let weightedSum = 0, weightTotal = 0;
 
-    rows.forEach((row, i) => {
-      if (scorecardScores[i] !== undefined) {
+    rows.forEach((row) => {
+      const compId = row.dataset.compId;
+      if (scorecardScores[compId] !== undefined) {
         const w = weightMap[row.dataset.weight] || 1;
-        weightedSum += scorecardScores[i] * w;
+        weightedSum += scorecardScores[compId] * w;
         weightTotal += w;
       }
     });
@@ -819,10 +822,76 @@
   }
 
 
+  // --- Competency Library Selection ---
+  function setupCompetencyToggles() {
+    const section = document.getElementById('section-competency-library');
+    if (!section) return;
+
+    section.addEventListener('change', (e) => {
+      const checkbox = e.target;
+      if (!checkbox.dataset.compId) return;
+      const compId = checkbox.dataset.compId;
+      const card = checkbox.closest('.comp-lib-card');
+
+      // Update selection state in data
+      const entry = lastAnalysisData.competencyLibrary.find(c => c.id === compId);
+      if (entry) entry.selected = checkbox.checked;
+
+      // Update card visual
+      if (card) {
+        card.classList.toggle('comp-lib-selected', checkbox.checked);
+        card.classList.toggle('comp-lib-deselected', !checkbox.checked);
+      }
+
+      // Rebuild questions, scorecard from selection
+      rebuildFromSelection();
+    });
+
+    // Toggle card open/close on header click (but not on checkbox)
+    section.addEventListener('click', (e) => {
+      if (e.target.closest('.comp-lib-toggle')) return;
+      const card = e.target.closest('.comp-lib-card');
+      if (card && e.target.closest('.comp-lib-header')) {
+        card.classList.toggle('open');
+      }
+    });
+  }
+
+  function rebuildFromSelection() {
+    if (!lastAnalysisData) return;
+
+    const selected = lastAnalysisData.competencyLibrary.filter(c => c.selected);
+    const selectedIds = selected.map(c => c.id);
+
+    // Rebuild questions
+    const questions = Analyzer.buildQuestionsForSelection(selectedIds, lastAnalysisData.analysis, T.getLang());
+    lastAnalysisData.questions = questions;
+    Renderer.renderQuestions(lastAnalysisData);
+
+    // Rebuild scorecard
+    const scorecard = Analyzer.buildScorecardFromLibrary(selected, lastAnalysisData.analysis);
+    lastAnalysisData.scorecard = scorecard;
+    Renderer.renderScorecard(lastAnalysisData);
+
+    // Rebuild interactivity for new scorecard
+    setupStarRatings();
+    buildFloatingScorecard();
+
+    // Preserve scores that still exist
+    const newScores = {};
+    const newIds = new Set(scorecard.map(s => s.id));
+    Object.entries(scorecardScores).forEach(([key, val]) => {
+      if (newIds.has(key)) newScores[key] = val;
+    });
+    scorecardScores = newScores;
+    updateAutoRecommendation();
+  }
+
   // --- Post-render setup (called after Renderer.renderAll) ---
   function setupResultsInteractivity(preserveScores) {
     setupStarRatings();
     setupSectionToggles();
+    setupCompetencyToggles();
     buildFloatingScorecard();
     showFloatingToggle(true);
     if (!preserveScores) {

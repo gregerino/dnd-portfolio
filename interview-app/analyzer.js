@@ -459,11 +459,94 @@ const Analyzer = (() => {
   //  COMPETENCY LIBRARY
   // ══════════════════════════════════════
 
-  function buildCompetencyLibrary(competencies, analysis) {
+  function slugify(name) {
+    return name.toLowerCase().replace(/[^a-zåäö0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  function buildBigFiveCompetencies(bigFive, analysis) {
+    return [
+      {
+        id: 'b5-curiosity-learning',
+        name: L('Curiosity & Learning Agility', 'Nyfikenhet & lärandeagilitet'),
+        why: L('Openness to experience drives innovation, adaptability, and continuous improvement. Curious people learn faster and adapt to changing environments.',
+               'Öppenhet för nya erfarenheter driver innovation, anpassningsförmåga och ständig förbättring. Nyfikna personer lär sig snabbare och anpassar sig till föränderliga miljöer.'),
+        strongLooks: L('Candidate shows genuine curiosity, describes self-directed learning, and embraces new challenges with enthusiasm.',
+                       'Kandidaten visar genuin nyfikenhet, beskriver eget lärande och tar sig an nya utmaningar med entusiasm.'),
+        observable: L(
+          ['Asks thoughtful questions during the interview', 'Describes experimenting with new approaches', 'Discusses failures as learning opportunities', 'Shows breadth of interests beyond core role'],
+          ['Ställer tankeväckande frågor under intervjun', 'Beskriver experiment med nya tillvägagångssätt', 'Diskuterar misslyckanden som lärtillfällen', 'Visar bredd av intressen utöver kärnrollen']
+        ),
+        source: 'bigFive', trait: 'openness', category: 'behavioral',
+        b5Ideal: bigFive.openness.ideal, b5Rationale: bigFive.openness.rationale,
+      },
+      {
+        id: 'b5-reliability-followthrough',
+        name: L('Reliability & Follow-Through', 'Tillförlitlighet & uppföljning'),
+        why: L('Conscientiousness predicts consistent performance. Reliable people meet commitments, maintain quality, and create trust through predictability.',
+               'Samvetsgrannhet förutsäger konsekvent prestation. Tillförlitliga personer håller åtaganden, upprätthåller kvalitet och skapar förtroende genom förutsägbarhet.'),
+        strongLooks: L('Candidate demonstrates organized work habits, tracks commitments systematically, and follows through on promises.',
+                       'Kandidaten visar organiserade arbetsvanor, följer upp åtaganden systematiskt och håller sina löften.'),
+        observable: L(
+          ['Describes structured planning habits', 'Provides specific examples of meeting tight deadlines', 'Shows attention to detail and quality', 'Mentions systems for tracking work'],
+          ['Beskriver strukturerade planeringsvanor', 'Ger specifika exempel på att hålla tajta deadlines', 'Visar uppmärksamhet på detaljer och kvalitet', 'Nämner system för att följa arbete']
+        ),
+        source: 'bigFive', trait: 'conscientiousness', category: 'behavioral',
+        b5Ideal: bigFive.conscientiousness.ideal, b5Rationale: bigFive.conscientiousness.rationale,
+      },
+      {
+        id: 'b5-interpersonal-engagement',
+        name: L('Interpersonal Engagement', 'Interpersonellt engagemang'),
+        why: L('Extraversion influences how people build relationships, energize teams, and drive collaboration. The right level depends on the role context.',
+               'Extraversion påverkar hur människor bygger relationer, energiserar team och driver samarbete. Rätt nivå beror på rollens kontext.'),
+        strongLooks: L('Candidate builds rapport naturally, engages actively in discussions, and balances social energy with focused work.',
+                       'Kandidaten bygger relation naturligt, deltar aktivt i diskussioner och balanserar social energi med fokuserat arbete.'),
+        observable: L(
+          ['Engages naturally in conversation', 'Describes building relationships proactively', 'Shows comfort presenting to groups', 'Balances collaboration with deep work'],
+          ['Engagerar sig naturligt i samtal', 'Beskriver proaktivt relationsbyggande', 'Visar bekvämlighet att presentera för grupper', 'Balanserar samarbete med djuparbete']
+        ),
+        source: 'bigFive', trait: 'extraversion', category: 'behavioral',
+        b5Ideal: bigFive.extraversion.ideal, b5Rationale: bigFive.extraversion.rationale,
+      },
+      {
+        id: 'b5-empathy-cooperation',
+        name: L('Empathy & Cooperation', 'Empati & samarbetsvilja'),
+        why: L('Agreeableness balances between building trust and maintaining healthy assertiveness. Both extremes create problems in teams.',
+               'Vänlighet balanserar mellan att bygga förtroende och upprätthålla sund bestämdhet. Båda extremerna skapar problem i team.'),
+        strongLooks: L('Candidate shows empathy, navigates disagreements respectfully, and provides honest feedback with care.',
+                       'Kandidaten visar empati, navigerar meningsskiljaktigheter respektfullt och ger ärlig feedback med omsorg.'),
+        observable: L(
+          ['Considers others\' perspectives in examples', 'Handles disagreements respectfully', 'Gives honest but caring feedback', 'Balances accommodation with assertiveness'],
+          ['Överväger andras perspektiv i exempel', 'Hanterar meningsskiljaktigheter respektfullt', 'Ger ärlig men omtänksam feedback', 'Balanserar anpassning med bestämdhet']
+        ),
+        source: 'bigFive', trait: 'agreeableness', category: 'behavioral',
+        b5Ideal: bigFive.agreeableness.ideal, b5Rationale: bigFive.agreeableness.rationale,
+      },
+      {
+        id: 'b5-stress-resilience',
+        name: L('Stress Resilience', 'Stresstålighet'),
+        why: L('Emotional stability supports consistent performance under pressure, healthy responses to setbacks, and a calming influence on teams.',
+               'Emotionell stabilitet stöder konsekvent prestation under press, sunda reaktioner på motgångar och ett lugnande inflytande på team.'),
+        strongLooks: L('Candidate remains composed discussing challenges, shows perspective on setbacks, and describes constructive coping strategies.',
+                       'Kandidaten förblir lugn vid diskussion om utmaningar, visar perspektiv på motgångar och beskriver konstruktiva copingstrategier.'),
+        observable: L(
+          ['Remains calm discussing stressful experiences', 'Describes healthy coping strategies', 'Shows perspective and self-awareness', 'Discusses failures openly without excessive distress'],
+          ['Förblir lugn vid diskussion om stressiga upplevelser', 'Beskriver hälsosamma copingstrategier', 'Visar perspektiv och självkännedom', 'Diskuterar misslyckanden öppet utan överdriven oro']
+        ),
+        source: 'bigFive', trait: 'emotionalStability', category: 'behavioral',
+        b5Ideal: bigFive.emotionalStability.ideal, b5Rationale: bigFive.emotionalStability.rationale,
+      },
+    ];
+  }
+
+  function buildCompetencyLibrary(competencies, analysis, bigFive) {
     const allComps = Object.values(competencies).flat();
-    return allComps.map(comp => ({
+    const roleComps = allComps.map(comp => ({
+      id: slugify(comp.name),
       name: comp.name,
       description: comp.why,
+      category: Object.entries(competencies).find(([, v]) => v.includes(comp))?.[0] || 'behavioral',
+      source: 'role',
+      selected: true,
       levels: {
         beginner: generateLevelDesc(comp.name, 'beginner', analysis),
         mid: generateLevelDesc(comp.name, 'mid', analysis),
@@ -474,6 +557,29 @@ const Analyzer = (() => {
       exampleEvidence: generateEvidence(comp.name),
       evaluationCriteria: generateCriteria(comp.name),
     }));
+
+    const b5Comps = buildBigFiveCompetencies(bigFive, analysis).map(comp => ({
+      id: comp.id,
+      name: comp.name,
+      description: comp.why,
+      category: comp.category,
+      source: 'bigFive',
+      trait: comp.trait,
+      b5Ideal: comp.b5Ideal,
+      b5Rationale: comp.b5Rationale,
+      selected: false,
+      levels: {
+        beginner: generateLevelDesc(comp.name, 'beginner', analysis),
+        mid: generateLevelDesc(comp.name, 'mid', analysis),
+        senior: generateLevelDesc(comp.name, 'senior', analysis),
+      },
+      positiveBehaviors: comp.observable,
+      riskIndicators: generateRiskIndicators(comp.name),
+      exampleEvidence: generateEvidence(comp.name),
+      evaluationCriteria: generateCriteria(comp.name),
+    }));
+
+    return [...roleComps, ...b5Comps];
   }
 
   function generateLevelDesc(name, level, analysis) {
@@ -1112,10 +1218,71 @@ const Analyzer = (() => {
         else if (cat === 'leadership') weight = analysis.leadership.level === 'high' ? 'critical' : 'high';
         else if (cat === 'communication') weight = 'medium';
         else weight = 'high';
-        allComps.push({ name: comp.name, category: cat, weight });
+        allComps.push({ id: slugify(comp.name), name: comp.name, category: cat, weight });
       }
     }
     return allComps;
+  }
+
+  // Build scorecard from selected library entries
+  function buildScorecardFromLibrary(selectedEntries, analysis) {
+    const allTech = Object.values(analysis.techSkills).flat();
+    const hasCodingSkills = (analysis.techSkills.languages?.length || 0) + (analysis.techSkills.frameworks?.length || 0);
+    const isTechRole = hasCodingSkills >= 2 || allTech.length >= 4;
+
+    return selectedEntries.map(entry => {
+      const cat = entry.category;
+      let weight;
+      if (cat === 'technical') weight = isTechRole ? 'critical' : 'medium';
+      else if (cat === 'behavioral') weight = 'high';
+      else if (cat === 'leadership') weight = analysis.leadership.level === 'high' ? 'critical' : 'high';
+      else if (cat === 'communication') weight = 'medium';
+      else weight = 'high';
+      return { id: entry.id, name: entry.name, category: cat, weight };
+    });
+  }
+
+  // Build questions filtered by selected competency IDs
+  function buildQuestionsForSelection(selectedIds, analysis, lang) {
+    if (lang) _lang = lang;
+    const allQuestions = buildQuestions(analysis);
+
+    // Map competency IDs to question categories
+    const idLower = new Set(selectedIds.map(id => id.toLowerCase()));
+
+    // Check if any technical comps are selected
+    const hasTech = selectedIds.some(id => {
+      const l = id.toLowerCase();
+      return l.includes('techni') || l.includes('tekni') || l.includes('code') || l.includes('kod') ||
+             l.includes('system-design') || l.includes('data-engineer');
+    });
+
+    // Check if any Big Five comps are selected
+    const traitMap = {
+      'b5-curiosity-learning': 'openness',
+      'b5-reliability-followthrough': 'conscientiousness',
+      'b5-interpersonal-engagement': 'extraversion',
+      'b5-empathy-cooperation': 'agreeableness',
+      'b5-stress-resilience': 'emotionalStability',
+    };
+    const selectedTraits = new Set();
+    selectedIds.forEach(id => { if (traitMap[id]) selectedTraits.add(traitMap[id]); });
+
+    // Filter bigFive questions by selected traits
+    if (selectedTraits.size > 0) {
+      allQuestions.bigFive = allQuestions.bigFive.filter(q => selectedTraits.has(q.trait));
+    }
+
+    // Filter technical questions
+    if (!hasTech) {
+      allQuestions.technical = allQuestions.technical.filter(q => {
+        // Keep non-tech questions (project management etc) for non-tech roles
+        const cat = (q.category || '').toLowerCase();
+        return cat.includes('project') || cat.includes('process') || cat.includes('projekt');
+      });
+    }
+
+    return allQuestions;
   }
 
   // ══════════════════════════════════════
@@ -1141,8 +1308,8 @@ const Analyzer = (() => {
     const analysis = { title, seniority, techSkills, softSkills, leadership, collaboration, responsibilities, techVsSoft };
 
     const competencies = buildCompetencies(analysis);
-    const competencyLibrary = buildCompetencyLibrary(competencies, analysis);
     const bigFive = buildBigFive(analysis);
+    const competencyLibrary = buildCompetencyLibrary(competencies, analysis, bigFive);
     const questions = buildQuestions(analysis);
     const followUps = buildFollowUps();
     const scorecard = buildScorecard(competencies, analysis);
@@ -1150,5 +1317,10 @@ const Analyzer = (() => {
     return { analysis, competencies, competencyLibrary, bigFive, questions, followUps, scorecard };
   }
 
-  return { analyze };
+  return {
+    analyze,
+    buildQuestionsForSelection,
+    buildScorecardFromLibrary,
+    setLang(lang) { _lang = lang; },
+  };
 })();
